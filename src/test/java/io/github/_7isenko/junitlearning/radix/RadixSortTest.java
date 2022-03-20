@@ -5,7 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author 7isenko
@@ -42,6 +43,24 @@ class RadixSortTest {
     }
 
     @Test
+    void sort_SingleValue() {
+        int[] arr = {1};
+        int[] sorted = {1};
+
+        radixSort.sort(arr);
+        assertArrayEquals(sorted, arr);
+    }
+
+    @Test
+    void sort_AllDigitsValue() {
+        int[] arr = {1234567890, 987654321};
+        int[] sorted = {987654321, 1234567890};
+
+        radixSort.sort(arr);
+        assertArrayEquals(sorted, arr);
+    }
+
+    @Test
     void sort_ShouldThrowExceptionForNegativeValues() {
         int[] arr = {1, 4, -6, 0, 100};
         assertThrows(IllegalArgumentException.class, () -> radixSort.sort(arr));
@@ -58,4 +77,5 @@ class RadixSortTest {
     void sort_ShouldExecuteForEmptyArray(int[] arr) {
         assertArrayEquals(arr, arr);
     }
+
 }
