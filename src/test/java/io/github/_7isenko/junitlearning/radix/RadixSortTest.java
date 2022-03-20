@@ -24,6 +24,24 @@ class RadixSortTest {
     }
 
     @Test
+    void sort_LongerArray() {
+        int[] arr = {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2};
+        int[] sorted = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2};
+
+        radixSort.sort(arr);
+        assertArrayEquals(sorted, arr);
+    }
+
+    @Test
+    void sort_BiggerNumbers() {
+        int[] arr = {2000000000, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2};
+        int[] sorted = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2000000000};
+
+        radixSort.sort(arr);
+        assertArrayEquals(sorted, arr);
+    }
+
+    @Test
     void sort_ShouldThrowExceptionForNegativeValues() {
         int[] arr = {1, 4, -6, 0, 100};
         assertThrows(IllegalArgumentException.class, () -> radixSort.sort(arr));
