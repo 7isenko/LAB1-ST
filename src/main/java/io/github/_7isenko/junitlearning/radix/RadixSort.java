@@ -6,52 +6,95 @@ import java.util.Arrays;
  * @author 7isenko
  */
 public class RadixSort {
+    private final int[] digits = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     public void sort(int[] array) throws IllegalArgumentException {
-
         // Checking
+        if (check(array)) return;
+
+        // Sorting
+        int[] tempArray = array.clone();
+
+        int length = countMaxNumberDigits(array);
+        for (int i = 1; i <= length; i++) {
+            resetDigits();
+            tempArray = iterate(tempArray, i);
+        }
+
+        System.arraycopy(tempArray, 0, array, 0, array.length);
+
+    }
+
+    /**
+     * Commits an iteration of the radix sorting
+     * @return current step array state
+     */
+    private int[] iterate(int[] arr, int pos) {
+        int[] newArr = new int[arr.length];
+
+        for (int num : arr) {
+            int digit = getDigitAt(num, pos);
+            if (digit != -1) {
+                digits[digit] = digits[digit] + 1;
+            }
+        }
+
+        for (int i = 1; i <= 9; i++) {
+            digits[i] = digits[i - 1] + digits[i];
+        }
+
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int digit = getDigitAt(arr[i], pos);
+            digits[digit] = digits[digit] - 1;
+            newArr[digits[digit]] = arr[i];
+        }
+        return newArr;
+    }
+
+    /**
+     * @return true if there is literally nothing to sort (empty array)
+     * @throws IllegalArgumentException on null or negative numbers in the array
+     */
+    private boolean check(int[] array) throws IllegalArgumentException {
         if (array == null) {
             throw new IllegalArgumentException("Array is null.");
         }
 
         if (array.length == 0) {
-            return;
+            return true;
         }
 
         if (Arrays.stream(array).min().getAsInt() < 0) {
             throw new IllegalArgumentException("Radix sort works only with positive numbers.");
         }
 
-        // Sorting
+        return false;
+    }
+
+    private int getDigitAt(int number, int position) {
+        if (position <= 0) return -1;
+
+        int digit = 0;
+        while (position > 0) {
+            digit = number % 10;
+            number /= 10;
+            position -= 1;
+        }
+        return digit;
+    }
+
+    private int countMaxNumberDigits(int[] array) throws IllegalArgumentException {
+        if (array.length == 0) throw new IllegalArgumentException("Unable to find any number in the empty array.");
+
         int max = Arrays.stream(array).max().getAsInt();
-        int length = String.valueOf(max).length();
 
-        int[][] bucket = new int[10][array.length];
-        int[] bucketCount = new int[array.length];
+        return String.valueOf(max).length();
+    }
 
-        int divisor = 1;
-
-        // Initialize the buckets
-        for (int pass = 0; pass < length; pass++) {
-
-            for (int i = 0; i < array.length; i++) {
-                bucketCount[i] = 0;
-            }
-
-            // sort the numbers according to the digit at passth place
-            for (int value : array) {
-                int remainder = (value / divisor) % 10;
-                bucket[remainder][bucketCount[remainder]] = value;
-                bucketCount[remainder] += 1;
-            }
-
-            // collect the numbers after PASS pass
-            for (int k = 0, i = 0; k < 10 && i < array.length; k++) {
-                for (int j = 0; j < bucketCount[k]; j++, i++) {
-                    array[i] = bucket[k][j];
-                }
-            }
-            divisor *= 10;
+    private void resetDigits() {
+        for (int i = 0; i <= 9; i++) {
+            digits[i] = 0;
         }
     }
+
 }
