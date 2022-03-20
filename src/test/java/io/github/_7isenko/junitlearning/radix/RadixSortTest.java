@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class RadixSortTest {
 
-    private RadixSort radixSort = new RadixSort();
+    private final RadixSort radixSort = new RadixSort();
 
     @Test
     void sort() {
