@@ -75,6 +75,7 @@ class RadixSortTest {
     @ParameterizedTest
     @EmptySource
     void sort_ShouldExecuteForEmptyArray(int[] arr) {
+        radixSort.sort(arr);
         assertArrayEquals(arr, arr);
     }
 
