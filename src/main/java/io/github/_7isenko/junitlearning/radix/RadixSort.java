@@ -26,8 +26,8 @@ public class RadixSort {
         int max = Arrays.stream(array).max().getAsInt();
         int length = String.valueOf(max).length();
 
-        int[][] bucket = new int[10][10];
-        int[] bucketCount = new int[10];
+        int[][] bucket = new int[10][array.length];
+        int[] bucketCount = new int[array.length];
 
         int divisor = 1;
 
