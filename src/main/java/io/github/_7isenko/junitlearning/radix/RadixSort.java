@@ -52,7 +52,7 @@ public class RadixSort {
     }
 
     /**
-     * @return true if there is literally nothing to sort (empty array)
+     * @return true if there is nothing to sort (empty array)
      * @throws IllegalArgumentException on null or negative numbers in the array
      */
     private boolean check(int[] array) throws IllegalArgumentException {
@@ -84,7 +84,9 @@ public class RadixSort {
     }
 
     private int countMaxNumberDigits(int[] array) throws IllegalArgumentException {
-        if (array.length == 0) throw new IllegalArgumentException("Unable to find any number in the empty array.");
+        if (array.length == 0) {
+            throw new IllegalArgumentException("Unable to find any number in the empty array.");
+        }
 
         int max = Arrays.stream(array).max().getAsInt();
 

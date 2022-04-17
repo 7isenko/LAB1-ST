@@ -7,6 +7,10 @@ public class Arctg {
 
     private final double epsilon;
 
+    public Arctg(double epsilon) {
+        this.epsilon = epsilon;
+    }
+
     public double arctg(double x) {
         if (Math.abs(x) >= 1) {
             throw new IllegalArgumentException("|x| must be < 1");
@@ -27,10 +31,6 @@ public class Arctg {
 
     private double step(double x, int step) {
         return (Math.pow(-1, step) / (2 * step + 1)) * Math.pow(x, (2 * step + 1));
-    }
-
-    public Arctg(double epsilon) {
-        this.epsilon = epsilon;
     }
 
     public double getEpsilon() {
