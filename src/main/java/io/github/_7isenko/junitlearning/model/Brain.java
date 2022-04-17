@@ -18,13 +18,16 @@ public class Brain {
 
     /**
      * Sets knowledge level. Must be between 0 and 1.0
+     *
      * @throws IllegalArgumentException if level is out of bounds
      */
-    public void setKnowledgeLevel(String name, double level) throws IllegalArgumentException{
+    public void setKnowledgeLevel(String name, double level) {
         Objects.requireNonNullElseGet(findKnowledge(name), () -> createKnowledge(name)).setLevel(level);
     }
 
-    private Knowledge findKnowledge(String name) {
+
+    private Knowledge findKnowledge(String name) throws IllegalArgumentException {
+        if (name == null) throw new IllegalArgumentException("Name is null");
         for (Knowledge knowledge : knowledgeList) {
             if (knowledge.getName().equals(name)) {
                 return knowledge;

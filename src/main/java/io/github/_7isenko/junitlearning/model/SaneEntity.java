@@ -18,5 +18,4 @@ public abstract class SaneEntity {
     public double getExplorationLevel(String what) {
         return brain.getKnowledgeLevel(what);
     }
-
 }
