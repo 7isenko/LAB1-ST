@@ -12,8 +12,8 @@ public class Arctg {
     }
 
     public double arctg(double x) {
-        if (Math.abs(x) >= 1) {
-            throw new IllegalArgumentException("|x| must be < 1");
+        if (Math.abs(x) > 1) {
+            throw new IllegalArgumentException("|x| must be <= 1");
         }
 
         double result = 0;
