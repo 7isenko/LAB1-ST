@@ -83,11 +83,7 @@ public class RadixSort {
         return digit;
     }
 
-    private int countMaxNumberDigits(int[] array) throws IllegalArgumentException {
-        if (array.length == 0) {
-            throw new IllegalArgumentException("Unable to find any number in the empty array.");
-        }
-
+    private int countMaxNumberDigits(int[] array) {
         int max = Arrays.stream(array).max().getAsInt();
 
         return String.valueOf(max).length();
