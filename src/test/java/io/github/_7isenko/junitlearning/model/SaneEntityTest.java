@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 /**
  * @author 7isenko
  */
-public class ExamBrainsTest {
+public class SaneEntityTest {
 
     private SaneEntity arthur;
     private SaneEntity mosquito;

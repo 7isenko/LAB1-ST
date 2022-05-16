@@ -52,10 +52,13 @@ public class RadixSort {
     }
 
     /**
-     * @return true if there is nothing to sort (empty array)
+     * Checks if given array is empty or invalid, otherwise false
+     *
+     * @return true if there is nothing to sort (empty array);
+     *         false if input is valid
      * @throws IllegalArgumentException on null or negative numbers in the array
      */
-    private boolean check(int[] array) throws IllegalArgumentException {
+    protected boolean check(int[] array) throws IllegalArgumentException {
         if (array == null) {
             throw new IllegalArgumentException("Array is null.");
         }
@@ -71,7 +74,14 @@ public class RadixSort {
         return false;
     }
 
-    private int getDigitAt(int number, int position) {
+    /**
+     * Works even if position is bigger than length of the number
+     *
+     * @param number to get digit from
+     * @param position index of digit to get.
+     * @return digit at the given position
+     */
+    protected int getDigitAt(int number, int position) {
         if (position <= 0) return -1;
 
         int digit = 0;
@@ -83,7 +93,11 @@ public class RadixSort {
         return digit;
     }
 
-    private int countMaxNumberDigits(int[] array) {
+    /**
+     * @implNote Implemented for positive numbers
+     * @return length of max number in the given array
+     */
+    protected int countMaxNumberDigits(int[] array) {
         int max = Arrays.stream(array).max().getAsInt();
 
         return String.valueOf(max).length();
